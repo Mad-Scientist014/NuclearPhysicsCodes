@@ -137,16 +137,11 @@ def massCalc(r, u, up, P, Pp, ptot):
 fig, axis = initGraph(plots)
 
 
-f1times = [f1['flows'][i]['temp'][0] for i in list(f1['flows'].keys())]
-f2times = [f2['flows'][i]['temp'][0] for i in list(f2['flows'].keys())]
-f3times = [f3['flows'][i]['temp'][0] for i in list(f3['flows'].keys())]
-f4times = [f4['flows'][i]['temp'][0] for i in list(f4['flows'].keys())]
-f5times = [f5['flows'][i]['temp'][0] for i in list(f5['flows'].keys())]
-f1times.sort()
-f2times.sort()
-f3times.sort()
-f4times.sort()
-f5times.sort()
+f1times = [f1['flows'][str(i)]['temp'][0] for i in range(1, len(list(f1['flows'].keys())))]
+f2times = [f2['flows'][str(i)]['temp'][0] for i in range(1, len(list(f2['flows'].keys())))]
+f3times = [f3['flows'][str(i)]['temp'][0] for i in range(1, len(list(f3['flows'].keys())))]
+f4times = [f4['flows'][str(i)]['temp'][0] for i in range(1, len(list(f4['flows'].keys())))]
+f5times = [f5['flows'][str(i)]['temp'][0] for i in range(1, len(list(f5['flows'].keys())))]
 
 temp = 3.5
 temp1 = f1times[np.where(f1times == find_nearest(f1times, temp))[0][0]]
@@ -572,7 +567,7 @@ axis[2][2].plot(f4out['rad'][:], f4out['entr'][:], color = 'blue', label = "Ye =
 axis[2][2].plot(f5out['rad'][:], f5out['entr'][:], color = 'orange', label = "Ye = " + str(round(f5['mainout']['ye'][0], 10)))
 #axis2.plot(f6out['time'][:], f6out['dens'][:], color = 'cyan', label = "Ye = " + str(round(f6['mainout']['ye'][0], 10)))
 axis[2][2].set_xlabel("Radius")
-axis[2][2].set_ylabel("Temperature")
+axis[2][2].set_ylabel("Entropy")
 axis[2][2].set_xscale("log")
 axis[2][2].set_yscale("log")
 axis[2][2].legend()

@@ -1,0 +1,371 @@
+########################################################
+# Template containing all possible parameters together #
+# with a brief description. For more information see   #
+# the documentation at:                                #
+# https://nuc-astro.github.io/WinNet/parameters.html   #
+#                                                      #
+# @date  : 22/08/2023                                  #
+# @author: M. Reichert                                 #
+########################################################
+
+##########################
+#   General parameters   #
+##########################
+
+# List of all isotopes used in the network
+# (sunet file)
+net_source = "@WINNET@/data/sunet_complete"
+
+# Temperature in GK to freeze the reaction rates. Below this value,
+# all reaction rates will kept constant. The default value is 1e-2 GK.
+# freeze_rate_temp =
+
+#######################
+#   Reaclib library   #
+#######################
+
+# The reaclib library containing most of the reaction rates
+reaclib_file  =	"@WINNET@/data/Reaclib_18_9_20"
+
+# Database with the properties of all isotopes
+# (winvn file)
+isotopes_file =	"@WINNET@/data/winvne_v2.0.dat"
+
+use_tabulated_rates = yes
+
+tabulated_rates_file = @WINNET@/data/vp_proc_tabulatedRatesVp.dat
+
+# tabulated_temperature_file = @WINNET@/data/tabulatedTempsVp.dat
+
+
+
+########################################
+# High temperature partition functions #
+########################################
+
+# Whether to use high temperature partition functions or not.
+# (yes/no)
+#se_htpf = 
+
+# Path to a file that contains high temperature partition functions
+# exceeding temperatures of 10 GK.
+#htpf_file =
+
+
+####################################
+# Input for theoretical weak rates #
+####################################
+
+# Weak rates library
+weak_rates_file= "@WINNET@/data/theoretical_weak_rates.dat"
+
+# Whether the chem_pot_file should be used or not.
+# If the following is set to "no", the tabulation of the rate files
+# will be used to extract the chemical potential of the electrons.
+use_timmes_mue = yes
+
+# Tabulated chemical potential of electron-positron gas. Only used if
+# use_timmes_mue is enabled.
+chem_pot_file= "@WINNET@/data/chem_table.dat"
+
+# Flag for theoretical weak rates:
+# =0 : No theoretical weak rates are used
+# =1 : direct tabulation of theoretical weak rates are used
+# =2 : log(ft) theoretical weak rates are used
+iwformat = 2
+
+# Temp at which theoretical weak rates should be replaced (0.1 GK)
+temp_reload_exp_weak_rates= 1d-1
+
+# Interpolation method for the interpolation on the
+# T - rho*Ye grid.
+# iwinterp = 0: Bilinear interpolation
+# iwinterp = 1: Bicubic interpolation
+iwinterp = 0
+
+
+############################
+# Thermodynamic conditions #
+############################
+
+# Is this a trajectory run?
+# Possible options are:
+#   "from_file"  : Take a trajectory file to get temperature and density.
+#   "analytic"   : Take a analytic expression.
+trajectory_mode = "from_file"
+
+
+### Case 1: trajectory_format = "from_file" ###
+
+# Path to the trajectory
+trajectory_file = "@WINNET@/data/Research_Data/vp-proc/traj_"
+
+# Trajectory format, valid entries are:
+#   time   : The time (s) of the trajectory
+#   temp   : The temperature (GK) of the trajectory
+#   dens   : The density (g/ccm) of the trajectory
+#   rad    : The radius (km) of the trajectory
+#   x,y,z  : x, y, and z coordinates (km) of the trajectory
+#   ye     : The electron fraction
+#   lanue  : Anti-electron neutrino luminosities (erg/s)
+#   lnue   : Electron neutrino luminosities (erg/s)
+#   tanue  : Electron anti-neutrino temperatures (MeV)
+#   tnue   : Electron neutrino temperatures (MeV)
+#   eanue  : Electron anti-neutrino energies (MeV)
+#   enue   : Electron Neutrino energies (MeV)
+#   lanux  : Summed muon and tau anti-neutrino luminosities (erg/s)
+#   lnux   : Summed muon and tau neutrino luminosities (erg/s)
+#   tanux  : Muon and tau anti-neutrino temperatures (MeV)
+#   tnux   : Muon and tau neutrino temperatures (MeV)
+#   eanux  : Muon and tau anti-neutrino energies (MeV)
+#   enux   : Muon and tau neutrino energies (MeV)
+#   skip   : skip a column
+#
+# Not all entries are mandatory. The units can be specified with a double point
+# behind the entry. Logarithmic columns are indicated by a log_ infront of the
+# entry.
+trajectory_format = "time temp dens rad ye lnue lanue tnue tanue"
+
+# Mode to interpolate the quantities from the trajectory file. All interpolations
+# are performed in lin-log space.
+#   = 1: Linear interpolation;
+#   = 2: Cubic interpolation;
+#   = 3: Akima interpolation;
+#   = 4: mAkima interpolation;
+#   = 5: PCHIP interpolation;
+# The default interpolation is PCHIP (5).
+ interp_mode = 5
+
+###########################
+# Additional alpha-decays #
+###########################
+
+# Supplement rates with additional alpha-decays
+# (yes/no)
+use_alpha_decay_file = yes
+
+# Alpha-decays that have been calculated with
+# the Viola-Seaborg formula
+alpha_decay_file = "@WINNET@/data/alpha_decays.dat"
+
+##########################
+# Additional Beta decays #
+##########################
+
+# Whether to use or not use beta decays in another format
+# (yes/no)
+use_beta_decay_file = no
+
+# Path to a file that contains beta decays with
+# beta delayed neutron probabilities.
+beta_decay_file = "@WINNET@/data/beta_decay_reaclib.dat"
+
+###########################
+#   Neutrino reactions    #
+###########################
+
+# Flag for neutrino rates:
+#    = 0: No neutrinos;
+#    = 1: Neutrino reactions on nucleons;
+#    = 2: Neutrino reactions on nucleons, charged current reactions
+#         on heavy nuclei;
+#    = 3: Neutrino reactions on nucleons, neutral current reactions
+#         on heavy nuclei;
+#    = 4: Neutrino reactions on nucleons, charged and neutral current reactions
+#         on heavy nuclei;
+nuflag = 2
+
+# Path to a file containing the neutrino reactions on nucleons
+nunucleo_rates_file  = "@WINNET@/data/neunucleons.dat"
+
+# Path to a file that contains the neutrino reaction channels.
+# Only used for nuflag > 1
+nuchannel_file       = "@WINNET@/data/nu_channels"
+
+# Path to a file that contains the neutrino reactions on heavy nuclei.
+# Only used for nuflag > 1
+nurates_file         = "@WINNET@/data/nucross.dat"
+
+# From where to take neutrino luminosities or energies.
+# Possible values are:
+#    neutrino_mode = 'from_file'
+#    neutrino_mode = 'analytic'
+# In the case that it is 'from_file' and nuflag>0, the trajectory file
+# has also to contain the neutrino information.
+neutrino_mode = 'from_file'
+
+###########
+# Fission #
+###########
+
+# Fission treatment:
+# =1: Panov
+fissflag = 1
+fission_rates = "@WINNET@/data/fissionrates_frdm"
+
+#######################
+# Coulomb corrections #
+#######################
+
+# Which electron screening scheme to use?
+# Possible values are:
+#   = 0: No screening
+#   = 1: Screening as in Kravchuk & Yakovlev 2014
+screening_mode = 0
+
+#######################
+# Initial composition #
+#######################
+
+# Whether or not to read the initial composition from file
+# (yes/no)
+read_initial_composition = no
+
+# Path to a file that contains the initial composition.
+#seed_file = @WINNET@/data/Research_Data/vp-proc/seed
+
+# Format of the seed file.
+# Possible entries are:
+#    A    : Mass number
+#    Z    : Proton number
+#    N    : Neutron number
+#    Name : Nucleus name
+#    X    : Mass fraction
+#    Y    : Abundance
+#    skip : Dummy column
+# The first rows of the seed file will be skipped if
+# they start with "#" or are blank.
+#seed_format = "Z A Y"
+
+#######################
+# Starting conditions #
+#######################
+
+# Maximum temperature to start at (in GK)
+initemp_hot  = 2.0e1
+
+# Minimum temperature to start at (in GK)
+initemp_cold = 2.0e1
+
+# Initial stepsize to take (in seconds)
+initial_stepsize =1E-15
+
+
+###################################
+# Nuclear statistical equilibrium #
+###################################
+
+# Used scheme to solve the NSE equations.
+# = 0: Newton-Raphson scheme
+# = 1: Powell's hybrid method
+nse_solver = 0
+
+# Initial temperature for NSE descend algorithm
+nse_descend_t9start= 100
+
+# Temperature (in GK) transition from Network -> NSE
+nsetemp_hot = 8
+
+# Temperature (in GK) transition from NSE -> Network
+nsetemp_cold = 7
+
+# Recalculation of NSE abundances every nth iteration
+nse_calc_every =1
+
+######################
+# Expansion settings #
+######################
+
+# How to extrapolate the thermodynamic quantities after the
+# trajectory has ended?
+# Possible values are
+#   = 1: Temperature adiabatic, density free (as in Korobkin et al. 2012);
+#   = 2: Exponential expansion;
+#   = 3: Expansion with constant velocity;
+#   = 4: Expansion with constant velocity (as in Fujimoto et al. 2008);
+expansiontype = 4
+
+# How many trajectory points to use in order to calculate the
+# expansion velocity?
+extrapolation_width = 5
+
+
+##########################
+# Termination conditions #
+##########################
+
+# When to end the simulation?:
+#    = 0: At the end of the trajectory;
+#    = 1: after final_time is reached;
+#    = 2: after final_temp is reached;
+#    = 3: after final_dens is reached;
+termination_criterion = 0
+
+# End after 1 Gyr
+final_time = 3.1536e16
+
+###########################
+#     Output Settings     #
+###########################
+
+### ASCII output ###
+
+# Output frequency for OUT file (or screen if not started with output piped to OUT)
+out_every = 10
+
+# Output frequency for mainout.dat
+h_mainout_every = 10
+
+#Output frequency of flow calculations
+h_flow_every = 10
+
+#Output frequency of Global Isotope Abundance snapshots
+snapshot_every = 10
+
+# Output frequency of reaction frequencies 
+h_timescales_every = 10
+
+# Frequency for nuclei that specifically should get tracked. Output will be
+# written to tracked_nuclei.dat
+h_track_nuclei_every = 10
+
+# Whether or not to save the final abundances in hdf5 format (yes) or
+# in ASCII format (no).
+# (yes/no)
+h_finab = yes
+
+### General path parameters for ASCII and HDF5 ###
+# Path to a file containing the nuclei that have to get tracked.
+# This path is only used if track_nuclei_every or h_track_nuclei_every is
+# greater than 0.
+track_nuclei_file = @WINNET@/data/Research_Data/vp-proc/track_nuclei
+
+# Create snapshots at 10s, 30min, and 1day
+custom_snapshots = no
+snapshot_file= "@WINNET@/data/Research_Data/vp-proc/custom_snapshots.dat"
+
+#######################
+# Numerical parameter #
+#######################
+
+# Integration method
+# 0 - Implicit Euler
+solver = 0
+
+# Maximum Newton-Raphson iterations
+nr_maxcount = 15
+
+# Newton-Raphson tolerance
+nr_tol = 1e-6
+
+# Maximum change of the timestep
+timestep_max    = 2.d0
+
+# Estimated change of abundances within one timestep
+timestep_factor = 1.0d-1
+
+# Minimum of abundances taken into account for timestep calculations
+timestep_Ymin   = 1.0d-10
+
+# Limit of the timestep from trajectory?
+timestep_traj_limit = yes

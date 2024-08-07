@@ -861,9 +861,6 @@ for temp in tempRange:
             data3[int(iso[2]),int(iso[1])] = iso[3]
         else:
             break
-    data3 = np.abs((data1 - data3) * 100 / data3) # Turn into Abund Difference
-    data3 = np.where(np.isfinite(data3), data3, 0)
-    data3 = np.where(data3 < 1e-15, 0, data3)
     im = ax[1][0].imshow(data3, cmap=cmap2, norm=norm2)
 
     data4 = np.zeros((200,200))
@@ -873,9 +870,6 @@ for temp in tempRange:
             data4[int(iso[2]),int(iso[1])] = iso[3]
         else:
             break
-    data4 = np.abs((data2 - data4) * 100 / data4) # Turn into Abund Difference
-    data4 = np.where(np.isfinite(data4), data4, 0)
-    data4 = np.where(data4 < 1e-15, 0, data4)
     im = ax[1][1].imshow(data4, cmap=cmap2, norm=norm2)
 
     maxFlowshow = 1e-0
@@ -909,11 +903,10 @@ for temp in tempRange:
     begin = time.time()
 
     fig.colorbar(scalarMap, ax=ax, location='left')
-    fig.colorbar(scalarMap2, ax=ax, location='right')
-    ax[0][0].set_title("Trajectory 1 (IncreasedRates) @ " + str(temp) + " GK" + "  MinFlowShow = " + str(np.round(minFlowshow1, abs(int(np.log10(minFlowshow1) - 2)))))
-    ax[0][1].set_title("Trajectory 2 (IncreasedRates) @ " + str(temp) + " GK" + "  MinFlowShow = " + str(np.round(minFlowshow2, abs(int(np.log10(minFlowshow2) - 2)))))
-    ax[1][0].set_title("AbundDiff @ " + str(temp) + " GK")
-    ax[1][1].set_title("AbundDiff @ " + str(temp) + " GK")
+    ax[0][0].set_title("Trajectory 1 @ " + str(temp) + " GK" + "  MinFlowShow = " + str(np.round(minFlowshow1, abs(int(np.log10(minFlowshow1) - 2)))))
+    ax[0][1].set_title("Trajectory 2 @ " + str(temp) + " GK" + "  MinFlowShow = " + str(np.round(minFlowshow2, abs(int(np.log10(minFlowshow2) - 2)))))
+    ax[1][0].set_title("Trajectory 3 @ " + str(temp) + " GK" + "  MinFlowShow = " + str(np.round(minFlowshow2, abs(int(np.log10(minFlowshow2) - 2)))))
+    ax[1][1].set_title("Trajectory 4 @ " + str(temp) + " GK" + "  MinFlowShow = " + str(np.round(minFlowshow2, abs(int(np.log10(minFlowshow2) - 2)))))
 
     for i in range(plots[0]):
         for j in range(plots[1]):

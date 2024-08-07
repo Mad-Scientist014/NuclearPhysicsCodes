@@ -37,6 +37,26 @@ This will save the result as a mp4 to your current working directory.
 
 FlowGraph.py
 -------------------
+This is the main plotting code for plotting Abudances and Flows as a function of temperature. It plots four datasets at each timestep
+It works by taking in a list of temperature values and finds the abundances and reaction flows at that temperature. 
+And instead of plotting as an animation as in the previous codes, it outputs each temp step as its own png file.
+
+To change the h5 files lines 28-33 set the paths to the h5 files 
+Note: It is assumed all the h5 files are named WinNet_data.h5
+
+Line 784 is used to set the temp values to evaluate at in units of Gk
+E.g. list(np.around(np.linspace(7, .1, 100),3)) will start at 7GK and go to .1 Gk in 100 even steps, the around function is used to round the temp values to 3 decimal places
+
+Lines 788 and 789 set the start and end points for the x and y axis respectively. The first entry being the starting point and the second the ending.
+
+Lines 906 through 909 set the Titles for the four plots. 
+
+Line 939 is where you set the path for all of the images to be placed in. 
+
+If you prefer a video format for the plots, the naming system has been setup so you can use ffmpeg to combine all of the images as frames into a video.
+
+At the very end of Line 939 the dpi= paramter sets the clarity of the image. The higher the value the more detailed the output image (enabling you to zoom in and such) 
+I found 300 to be a good value where it doesn't take too long to save but it still fairly clear even zoomed in. 
 
 
 MainPlotter.py
@@ -71,7 +91,9 @@ TrajectoryCalculator
 -------------------
 
 
-calcRates.oy
+calcRates.py
+-------------------
 
 
 vo-proc.par
+-------------------

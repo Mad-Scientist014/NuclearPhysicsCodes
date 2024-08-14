@@ -137,5 +137,6 @@ Input h5 files are set on libes 14 through 24. Each trajecory is processed indep
 
 The output file name is ste on line 626 for trajecory 1 and similar for the rest. 
 
-vo-proc.par
+vp-proc.par
 -------------------
+The Winnet paramater file used for all of the nucleosyntheis calculations. 

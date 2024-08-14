@@ -51,7 +51,7 @@ f3 = h5py.File(path3 + filename, 'r')
 f4 = h5py.File(path4 + filename, 'r')
 f5 = h5py.File(path5 + filename, 'r')
 
-path = "/home/thana1dr/Research_Results&Data/Week8/Automatic/ReactionLists/"
+path = SummedFlowsPath
 
 def loadFile(path, filename):
     data = []

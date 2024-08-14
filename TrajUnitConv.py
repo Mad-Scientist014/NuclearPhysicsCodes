@@ -7,6 +7,7 @@ from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
 import matplotlib as mpl
 
+# Specify the directory where your .dat files are located
 directory = "/home/thana1dr/Downloads/Jacobi_nup/"
 pathout = "/home/thana1dr/WinNet/data/Research_Data/vp-proc/"
 
@@ -45,8 +46,7 @@ min_Tanue = 5.2e0
 max_Tanue = 5.3e0
 
 
-# Specify the directory where your .dat files are located
-directory = "/home/thana1dr/Downloads/Jacobi_nup/"
+
 
 def chooseTraj():
     opts = []
